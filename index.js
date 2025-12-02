@@ -69,7 +69,7 @@ function exitHandler() {
 }
 
 function startServer() {
-  // load Elasticsearch type_mapping before starting the web server
+  // load Elasticsearch/OpenSearch type_mapping before starting the web server
   // This has to be run on each forked worker because unlike "real"
   // unix `fork`, these forks don't share memory with other workers
   type_mapping.load(() => {

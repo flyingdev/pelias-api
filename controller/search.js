@@ -1,3 +1,4 @@
+require('dotenv').config();
 const _ = require('lodash');
 const searchService = require('../service/search');
 const logger = require('pelias-logger').get('api');
@@ -9,7 +10,7 @@ function isRequestTimeout(err) {
   return _.get(err, 'status') === 408;
 }
 
-function setup( peliasConfig, esclient, query, should_execute ){
+function setup( peliasConfig, searchClient, query, should_execute ){
   const apiConfig = _.get(peliasConfig, 'api', {});
 
   function controller( req, res, next ){
@@ -29,30 +30,35 @@ function setup( peliasConfig, esclient, query, should_execute ){
     // some queries use the results of previous queries to Placeholder
     const renderedQuery = query(req.clean, res);
 
-    // if there's no query to call ES with, skip the service
+    // if there's no query to call Elasticsearch/OpenSearch with, skip the service
     if (_.isUndefined(renderedQuery)) {
-      debugLog.push(req, 'No query to call ES with. Skipping');
+      debugLog.push(req, 'No query to call Elasticsearch/OpenSearch with. Skipping');
       return next();
     }
 
     // options for retry
     // maxRetries is from the API config with default of 3
-    // factor of 1 means that each retry attempt will esclient requestTimeout
+    // factor of 1 means that each retry attempt will searchClient requestTimeout
     const operationOptions = {
       retries: _.get(apiConfig, 'requestRetries', 3),
       factor: 1,
-      minTimeout: _.get(esclient, 'transport.requestTimeout')
+      minTimeout: _.get(searchClient, 'transport.requestTimeout')
     };
 
     // setup a new operation
     const operation = retry.operation(operationOptions);
 
-    // elasticsearch command
+    // searchclient command
     const cmd = {
       index: apiConfig.indexName,
-      searchType: 'dfs_query_then_fetch',
       body: renderedQuery.body
     };
+
+    if (process.env.PELIAS_OPENSEARCH === 'true') {
+      cmd.search_type = 'dfs_query_then_fetch';
+    } else {
+      cmd.searchType = 'dfs_query_then_fetch';
+    }
 
     // support for the 'clean.enableElasticExplain' config flag
     if (_.get(req, 'clean.enableElasticExplain') === true) {
@@ -67,10 +73,10 @@ function setup( peliasConfig, esclient, query, should_execute ){
     let debugUrl;
     if (_.get(req, 'clean.exposeInternalDebugTools') === true) {
 
-      // select a random elasticsearch host to use for 'exposeInternalDebugTools' actions
-      const host = _.first(esclient.transport.connectionPool.getConnections(null, 1)).host;
+      // select a random searchClient host to use for 'exposeInternalDebugTools' actions
+      const host = _.first(searchClient.transport.connectionPool.getConnections(null, 1)).host;
 
-      // generate a URL which opens this query directly in elasticsearch
+      // generate a URL which opens this query directly in searchClient
       debugUrl = host.makeUrl({
         path: `${apiConfig.indexName}/_search`,
         query: {
@@ -82,15 +88,15 @@ function setup( peliasConfig, esclient, query, should_execute ){
 
     debugLog.push(req, {
       debugUrl,
-      ES_req: cmd
+      SearchClient_req: cmd
     });
 
     operation.attempt((currentAttempt) => {
       const initialTime = debugLog.beginTimer(req, `Attempt ${currentAttempt}`);
-      // query elasticsearch
-      searchService( esclient, cmd, function( err, docs, meta, data ){
+      // query elasticsearch or opensearch
+      searchService( searchClient, cmd, function( err, docs, meta, data ){
 
-        // keep tally of hit counts - compatible with new/old versions of ES
+        // keep tally of hit counts - compatible with new/old versions of Elasticsearch/OpenSearch
         let totalHits = 0;
         if( _.has(data, 'hits.total') ) {
           totalHits = _.isPlainObject(data.hits.total) ? data.hits.total.value : data.hits.total;
@@ -99,15 +105,15 @@ function setup( peliasConfig, esclient, query, should_execute ){
         const message = {
           controller: 'search',
           queryType: renderedQuery.type,
-          es_hits: totalHits,
+          SearchClient_hits: totalHits,
           result_count: (docs || []).length,
-          es_took: _.get(data, 'took', undefined),
+          SearchClient_took: _.get(data, 'took', undefined),
           response_time: _.get(data, 'response_time', undefined),
           params: req.clean,
           retries: currentAttempt - 1,
           text_length: _.get(req, 'clean.text.length', 0)
         };
-        logger.info('elasticsearch', message);
+        logger.info('SearchClient', message);
 
         // returns true if the operation should be attempted again
         // (handles bookkeeping of maxRetries)
@@ -134,7 +140,7 @@ function setup( peliasConfig, esclient, query, should_execute ){
         // set response data
         else {
           // because this controller may be called multiple times, there may already
-          // be results.  if there are no results from this ES call, don't overwrite
+          // be results.  if there are no results from this SearchClient call, don't overwrite
           // what's already there from a previous call.
           if (!_.isEmpty(docs)) {
             res.data = docs;
@@ -146,17 +152,17 @@ function setup( peliasConfig, esclient, query, should_execute ){
           // put an entry in the debug log no matter the number of results
           debugLog.push(req, {queryType: {
             [renderedQuery.type] : {
-              es_took: message.es_took,
+              SearchClient_took: message.SearchClient_took,
               response_time: message.response_time,
               retries: message.retries,
-              es_hits: message.es_hits,
-              es_result_count: message.result_count
+              SearchClient_hits: message.SearchClient_hits,
+              SearchClient_result_count: message.result_count
             }
           }});
         }
-        logger.debug('[ES response]', docs);
+        logger.debug('[SearchClient response]', docs);
         if (req.clean.enableElasticDebug) {
-          debugLog.push(req, { ES_response: _.cloneDeep({ docs, meta, data }) });
+          debugLog.push(req, { SearchClient_response: _.cloneDeep({ docs, meta, data }) });
         }
         next();
       });
