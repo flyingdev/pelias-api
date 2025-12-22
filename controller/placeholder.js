@@ -242,7 +242,7 @@ function synthesizeDocs(boundaryCountry, result) {
 }
 
 function buildOSDoc(doc) {
-  const esDoc = doc.toOSDocument();
+  const esDoc = doc.toESDocument();
   return _.extend(esDoc.data, { _id: esDoc._id });
 }
 

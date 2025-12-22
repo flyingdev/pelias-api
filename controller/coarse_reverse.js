@@ -96,7 +96,7 @@ function synthesizeDoc(results) {
 
     }
 
-    const osDoc = doc.toOSDocument();
+    const osDoc = doc.toESDocument();
     osDoc.data._id = osDoc._id;
     return osDoc.data;
 
