@@ -5,6 +5,7 @@ const logger = require('pelias-logger').get('api');
 const logging = require( '../helper/logging' );
 const retry = require('retry');
 const Debug = require('../helper/debug');
+const { getDatabaseConfig } = require('../helper/client')
 
 function isRequestTimeout(err) {
   return _.get(err, 'status') === 408;
@@ -54,7 +55,9 @@ function setup( peliasConfig, searchClient, query, should_execute ){
       body: renderedQuery.body
     };
 
-    if (process.env.PELIAS_OPENSEARCH === 'true') {
+    const { engine } = getDatabaseConfig();
+
+    if (engine === 'opensearch') {
       cmd.search_type = 'dfs_query_then_fetch';
     } else {
       cmd.searchType = 'dfs_query_then_fetch';

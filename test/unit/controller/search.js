@@ -1,6 +1,7 @@
 require('dotenv').config();
 const _ = require('lodash');
 const setup = require('../../../controller/search');
+const { getDatabaseConfig } = require('../../../helper/client')
 const proxyquire =  require('proxyquire').noCallThru();
 
 module.exports.tests = {};
@@ -40,7 +41,9 @@ module.exports.tests.success = function(test, common) {
           body: 'this is the query body'
         };
 
-        if (process.env.PELIAS_OPENSEARCH === 'true') {
+        const { engine } = getDatabaseConfig();
+
+        if (engine === 'opensearch') {
           expectedCmd.search_type = 'dfs_query_then_fetch';
         } else {
           expectedCmd.searchType = 'dfs_query_then_fetch';
@@ -111,7 +114,8 @@ module.exports.tests.success = function(test, common) {
           body: 'this is the query body'
         };
 
-        if (process.env.PELIAS_OPENSEARCH === 'true') {
+        const { engine } = getDatabaseConfig();
+        if (engine === 'opensearch') {
           expectedCmd.search_type = 'dfs_query_then_fetch';
         } else {
           expectedCmd.searchType = 'dfs_query_then_fetch';
@@ -181,7 +185,8 @@ module.exports.tests.success = function(test, common) {
           body: 'this is the query body'
         };
 
-        if (process.env.PELIAS_OPENSEARCH === 'true') {
+        const { engine } = getDatabaseConfig();
+        if (engine === 'opensearch') {
           expectedCmd.search_type = 'dfs_query_then_fetch';
         } else {
           expectedCmd.searchType = 'dfs_query_then_fetch';
@@ -264,7 +269,8 @@ module.exports.tests.success = function(test, common) {
           body: 'this is the query body'
         };
 
-        if (process.env.PELIAS_OPENSEARCH === 'true') {
+        const { engine } = getDatabaseConfig();
+        if (engine === 'opensearch') {
           expectedCmd.search_type = 'dfs_query_then_fetch';
         } else {
           expectedCmd.searchType = 'dfs_query_then_fetch';
@@ -354,7 +360,8 @@ module.exports.tests.timeout = function(test, common) {
           body: 'this is the query body'
         };
 
-        if (process.env.PELIAS_OPENSEARCH === 'true') {
+        const { engine } = getDatabaseConfig();
+        if (engine === 'opensearch') {
           expectedCmd.search_type = 'dfs_query_then_fetch';
         } else {
           expectedCmd.searchType = 'dfs_query_then_fetch';
