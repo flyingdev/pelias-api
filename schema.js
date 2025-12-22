@@ -6,7 +6,7 @@ const Joi = require('@hapi/joi');
 // * api.version (string)
 // * api.indexName (string)
 // * api.host (string)
-// * esclient (object - positive integer requestTimeout)
+// * dbclient (object - positive integer requestTimeout)
 //
 // optional:
 // * api.accessLog (string)
@@ -65,7 +65,7 @@ module.exports = Joi.object().keys({
     }).unknown(true).default({})
 
   }).unknown(true),
-  esclient: Joi.object().required().keys({
+  dbclient: Joi.object().required().keys({
     requestTimeout: Joi.number().integer().min(0)
   }).unknown(true)
 }).unknown(true);

@@ -38,7 +38,7 @@ module.exports.tests.completely_valid = (test, common) => {
         maxSize: 40,
         defaultSize: 10
       },
-      esclient: {
+      dbclient: {
         requestTimeout: 17
       }
     };
@@ -57,7 +57,7 @@ module.exports.tests.completely_valid = (test, common) => {
         indexName: 'index name value',
         host: 'host value'
       },
-      esclient: {
+      dbclient: {
         requestTimeout: 17
       }
     };
@@ -75,7 +75,7 @@ module.exports.tests.completely_valid = (test, common) => {
 module.exports.tests.api_validation = (test, common) => {
   test('config without api should throw error', (t) => {
     var config = {
-      esclient: {}
+      dbclient: {}
     };
 
     const result = schema.validate(config);
@@ -94,7 +94,7 @@ module.exports.tests.api_validation = (test, common) => {
         host: 'host value',
         unknown: 'unknown value'
       },
-      esclient: {}
+      dbclient: {}
     };
 
     const result = schema.validate(config);
@@ -112,7 +112,7 @@ module.exports.tests.api_validation = (test, common) => {
           indexName: 'index name value',
           host: 'host value'
         },
-        esclient: {}
+        dbclient: {}
       };
 
       const result = schema.validate(config);
@@ -134,7 +134,7 @@ module.exports.tests.api_validation = (test, common) => {
           indexName: value,
           host: 'host value'
         },
-        esclient: {}
+        dbclient: {}
       };
 
       const result = schema.validate(config);
@@ -156,7 +156,7 @@ module.exports.tests.api_validation = (test, common) => {
           indexName: 'index name value',
           host: value
         },
-        esclient: {}
+        dbclient: {}
       };
 
       const result = schema.validate(config);
@@ -179,7 +179,7 @@ module.exports.tests.api_validation = (test, common) => {
           host: 'host value',
           accessLog: value
         },
-        esclient: {}
+        dbclient: {}
       };
 
       const result = schema.validate(config);
@@ -202,7 +202,7 @@ module.exports.tests.api_validation = (test, common) => {
           host: 'host value',
           relativeScores: value
         },
-        esclient: {}
+        dbclient: {}
       };
 
       const result = schema.validate(config);
@@ -225,7 +225,7 @@ module.exports.tests.api_validation = (test, common) => {
           host: 'host value',
           localization: value
         },
-        esclient: {}
+        dbclient: {}
       };
 
       const result = schema.validate(config);
@@ -249,7 +249,7 @@ module.exports.tests.api_validation = (test, common) => {
           unknown_property: 'value'
         }
       },
-      esclient: {}
+      dbclient: {}
     };
 
     const result = schema.validate(config);
@@ -272,7 +272,7 @@ module.exports.tests.api_validation = (test, common) => {
             flipNumberAndStreetCountries: value
           }
         },
-        esclient: {}
+        dbclient: {}
       };
 
       const result = schema.validate(config);
@@ -297,7 +297,7 @@ module.exports.tests.api_validation = (test, common) => {
             flipNumberAndStreetCountries: [value]
           }
         },
-        esclient: {}
+        dbclient: {}
       };
 
       const result = schema.validate(config);
@@ -322,7 +322,7 @@ module.exports.tests.api_validation = (test, common) => {
             flipNumberAndStreetCountries: [value]
           }
         },
-        esclient: {}
+        dbclient: {}
       };
 
       const result = schema.validate(config);
@@ -347,7 +347,7 @@ module.exports.tests.api_validation = (test, common) => {
           host: 'host value',
           requestRetries: value
         },
-        esclient: {}
+        dbclient: {}
       };
 
       const result = schema.validate(config);
@@ -369,7 +369,7 @@ module.exports.tests.api_validation = (test, common) => {
         host: 'host value',
         requestRetries: 17.3
       },
-      esclient: {}
+      dbclient: {}
     };
 
     const result = schema.validate(config);
@@ -388,7 +388,7 @@ module.exports.tests.api_validation = (test, common) => {
         host: 'host value',
         requestRetries: -1
       },
-      esclient: {}
+      dbclient: {}
     };
 
     const result = schema.validate(config);
@@ -409,7 +409,7 @@ module.exports.tests.api_validation = (test, common) => {
           host: 'host value',
           placeholderService: value
         },
-        esclient: {}
+        dbclient: {}
       };
 
       const result = schema.validate(config);
@@ -433,7 +433,7 @@ module.exports.tests.api_validation = (test, common) => {
           host: 'host value',
           pipService: value
         },
-        esclient: {}
+        dbclient: {}
       };
 
       const result = schema.validate(config);
@@ -457,7 +457,7 @@ module.exports.tests.api_validation = (test, common) => {
             'focus.point.lat': value
           }
         },
-        esclient: {}
+        dbclient: {}
       };
 
       const result = schema.validate(config);
@@ -482,7 +482,7 @@ module.exports.tests.api_validation = (test, common) => {
             'focus.point.lon': value
           }
         },
-        esclient: {}
+        dbclient: {}
       };
 
       const result = schema.validate(config);
@@ -505,7 +505,7 @@ module.exports.tests.api_validation = (test, common) => {
           host: 'host value',
           defaultParameters: value
         },
-        esclient: {}
+        dbclient: {}
       };
 
       const result = schema.validate(config);
@@ -527,7 +527,7 @@ module.exports.tests.api_validation = (test, common) => {
         host: 'host value',
         maxSize: 'ab'
       },
-      esclient: {
+      dbclient: {
         requestTimeout: 17
       },
     };
@@ -548,7 +548,7 @@ module.exports.tests.api_validation = (test, common) => {
       host: 'host value',
       minSize: -1
     },
-    esclient: {
+    dbclient: {
       requestTimeout: 17
     },
   };
@@ -570,7 +570,7 @@ test('config with a bigger defaultSize than maxSize should throw an error', (t) 
       maxSize: 5,
       defaultSize: 6
     },
-    esclient: {
+    dbclient: {
       requestTimeout: 17
     },
   };
@@ -592,7 +592,7 @@ test('config with a bigger minSize than maxSize should throw an error', (t) => {
       maxSize: 5,
       minSize: 6
     },
-    esclient: {
+    dbclient: {
       requestTimeout: 17
     },
   };
@@ -619,7 +619,7 @@ module.exports.tests.api_services_validation = (test, common) => {
           unknown_property: 'value'
         }
       },
-      esclient: {}
+      dbclient: {}
     };
 
     const result = schema.validate(config);
@@ -645,7 +645,7 @@ module.exports.tests.service_validation = (test, common) => {
           host: 'host value',
           services: {}
         },
-        esclient: {}
+        dbclient: {}
       };
 
       config.api.services[service] = {
@@ -672,7 +672,7 @@ module.exports.tests.service_validation = (test, common) => {
           host: 'host value',
           services: {}
         },
-        esclient: {}
+        dbclient: {}
       };
 
       config.api.services[service] = {};
@@ -697,7 +697,7 @@ module.exports.tests.service_validation = (test, common) => {
             host: 'host value',
             services: {}
           },
-          esclient: {}
+          dbclient: {}
         };
 
         config.api.services[service] = {
@@ -727,7 +727,7 @@ module.exports.tests.service_validation = (test, common) => {
             host: 'host value',
             services: {}
           },
-          esclient: {}
+          dbclient: {}
         };
 
         config.api.services[service] = {
@@ -758,7 +758,7 @@ module.exports.tests.service_validation = (test, common) => {
           host: 'host value',
           services: {}
         },
-        esclient: {}
+        dbclient: {}
       };
 
       config.api.services[service] = {
@@ -787,7 +787,7 @@ module.exports.tests.service_validation = (test, common) => {
             host: 'host value',
             services: {}
           },
-          esclient: {}
+          dbclient: {}
         };
 
         config.api.services[service] = {
@@ -817,7 +817,7 @@ module.exports.tests.service_validation = (test, common) => {
           host: 'host value',
           services: {}
         },
-        esclient: {}
+        dbclient: {}
       };
 
       config.api.services[service] = {
@@ -845,7 +845,7 @@ module.exports.tests.service_validation = (test, common) => {
           host: 'host value',
           services: {}
         },
-        esclient: {}
+        dbclient: {}
       };
 
       config.api.services[service] = {
@@ -874,7 +874,7 @@ module.exports.tests.service_validation = (test, common) => {
             host: 'host value',
             services: {}
           },
-          esclient: {}
+          dbclient: {}
         };
 
         config.api.services[service] = {
@@ -904,7 +904,7 @@ module.exports.tests.service_validation = (test, common) => {
           host: 'host value',
           services: {}
         },
-        esclient: {}
+        dbclient: {}
       };
 
       config.api.services[service] = {
@@ -932,7 +932,7 @@ module.exports.tests.service_validation = (test, common) => {
           host: 'host value',
           services: {}
         },
-        esclient: {}
+        dbclient: {}
       };
 
       config.api.services[service] = {
@@ -953,8 +953,8 @@ module.exports.tests.service_validation = (test, common) => {
 
 };
 
-module.exports.tests.esclient_validation = (test, common) => {
-  test('config without esclient should throw error', (t) => {
+module.exports.tests.dbclient_validation = (test, common) => {
+  test('config without dbclient should throw error', (t) => {
     var config = {
       api: {
         version: 'version value',
@@ -966,12 +966,12 @@ module.exports.tests.esclient_validation = (test, common) => {
     const result = schema.validate(config);
 
     t.equals(result.error.details.length, 1);
-    t.equals(result.error.details[0].message, '"esclient" is required');
+    t.equals(result.error.details[0].message, '"dbclient" is required');
     t.end();
 
   });
 
-  test('config with non-object esclient should throw error', (t) => {
+  test('config with non-object dbclient should throw error', (t) => {
     [null, 17, [], 'string', true].forEach((value) => {
       var config = {
         api: {
@@ -979,13 +979,13 @@ module.exports.tests.esclient_validation = (test, common) => {
           indexName: 'index name value',
           host: 'host value'
         },
-        esclient: value
+        dbclient: value
       };
 
       const result = schema.validate(config);
 
       t.equals(result.error.details.length, 1);
-      t.equals(result.error.details[0].message, '"esclient" must be of type object');
+      t.equals(result.error.details[0].message, '"dbclient" must be of type object');
 
     });
 
@@ -1001,7 +1001,7 @@ module.exports.tests.esclient_validation = (test, common) => {
           indexName: 'index name value',
           host: 'host value'
         },
-        esclient: {
+        dbclient: {
           requestTimeout: value
         }
       };
@@ -1009,7 +1009,7 @@ module.exports.tests.esclient_validation = (test, common) => {
       const result = schema.validate(config);
 
       t.equals(result.error.details.length, 1);
-      t.equals(result.error.details[0].message, '"esclient.requestTimeout" must be a number');
+      t.equals(result.error.details[0].message, '"dbclient.requestTimeout" must be a number');
 
     });
 
@@ -1024,7 +1024,7 @@ module.exports.tests.esclient_validation = (test, common) => {
         indexName: 'index name value',
         host: 'host value'
       },
-      esclient: {
+      dbclient: {
         requestTimeout: 17.3
       }
     };
@@ -1032,7 +1032,7 @@ module.exports.tests.esclient_validation = (test, common) => {
     const result = schema.validate(config);
 
     t.equals(result.error.details.length, 1);
-    t.equals(result.error.details[0].message, '"esclient.requestTimeout" must be an integer');
+    t.equals(result.error.details[0].message, '"dbclient.requestTimeout" must be an integer');
     t.end();
 
   });
@@ -1044,7 +1044,7 @@ module.exports.tests.esclient_validation = (test, common) => {
         indexName: 'index name value',
         host: 'host value'
       },
-      esclient: {
+      dbclient: {
         requestTimeout: -1
       }
     };
@@ -1052,7 +1052,7 @@ module.exports.tests.esclient_validation = (test, common) => {
     const result = schema.validate(config);
 
     t.equals(result.error.details.length, 1);
-    t.equals(result.error.details[0].message, '"esclient.requestTimeout" must be larger than or equal to 0');
+    t.equals(result.error.details[0].message, '"dbclient.requestTimeout" must be larger than or equal to 0');
     t.end();
 
   });

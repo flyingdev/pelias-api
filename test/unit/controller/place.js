@@ -17,15 +17,15 @@ module.exports.tests.success = (test, common) => {
     const config = {
       indexName: 'indexName value'
     };
-    const esclient = 'this is the esclient';
+    const dbclient = 'this is the dbclient';
 
     // request timeout messages willl be written here
     const infoMesssages = [];
 
-    // a controller that validates the esclient and cmd that was passed to the search service
+    // a controller that validates the dbclient and cmd that was passed to the search service
     const controller = proxyquire('../../../controller/place', {
-      '../service/mget': (esclient, query, callback) => {
-        t.equal(esclient, 'this is the esclient');
+      '../service/mget': (dbclient, query, callback) => {
+        t.equal(dbclient, 'this is the dbclient');
         t.deepEqual(query, [
           {
             _index: 'indexName value',
@@ -41,7 +41,7 @@ module.exports.tests.success = (test, common) => {
 
         callback(undefined, docs);
       }
-    })(config, esclient);
+    })(config, dbclient);
 
     const req = {
       clean: {
@@ -78,13 +78,13 @@ module.exports.tests.success = (test, common) => {
 
 module.exports.tests.error_conditions = (test, common) => {
   test('non-empty req.errors should ', (t) => {
-    const esclient = () => {
-      throw new Error('esclient should not have been called');
+    const dbclient = () => {
+      throw new Error('dbclient should not have been called');
     };
-    const controller = setup( {}, esclient );
+    const controller = setup( {}, dbclient );
 
     // the existence of `errors` means that a sanitizer detected an error,
-    //  so don't call the esclient
+    //  so don't call the dbclient
     const req = {
       errors: ['error']
     };
@@ -101,7 +101,7 @@ module.exports.tests.error_conditions = (test, common) => {
     const config = {
       indexName: 'indexName value'
     };
-    const esclient = 'this is the esclient';
+    const dbclient = 'this is the dbclient';
 
     // request timeout messages willl be written here
     const infoMesssages = [];
@@ -112,14 +112,14 @@ module.exports.tests.error_conditions = (test, common) => {
       message: 'an internal server error occurred'
     };
 
-    // a controller that validates the esclient and cmd that was passed to the search service
+    // a controller that validates the dbclient and cmd that was passed to the search service
     const controller = proxyquire('../../../controller/place', {
-      '../service/mget': (esclient, query, callback) => {
+      '../service/mget': (dbclient, query, callback) => {
         const docs = [{}, {}];
 
         callback(nonTimeoutError, docs);
       }
-    })(config, esclient);
+    })(config, dbclient);
 
     const req = {
       clean: {
@@ -153,7 +153,7 @@ module.exports.tests.timeout = function(test, common) {
     const config = {
       indexName: 'indexName value'
     };
-    const esclient = 'this is the esclient';
+    const dbclient = 'this is the dbclient';
 
     let searchServiceCallCount = 0;
 
@@ -166,9 +166,9 @@ module.exports.tests.timeout = function(test, common) {
     // request timeout messages willl be written here
     const infoMesssages = [];
 
-    // a controller that validates the esclient and cmd that was passed to the search service
+    // a controller that validates the dbclient and cmd that was passed to the search service
     const controller = proxyquire('../../../controller/place', {
-      '../service/mget': (esclient, cmd, callback) => {
+      '../service/mget': (dbclient, cmd, callback) => {
         // not that the searchService got called
         searchServiceCallCount++;
 
@@ -185,7 +185,7 @@ module.exports.tests.timeout = function(test, common) {
           };
         }
       }
-    })(config, esclient);
+    })(config, dbclient);
 
     const req = {
       clean: {
@@ -222,7 +222,7 @@ module.exports.tests.timeout = function(test, common) {
       indexName: 'indexName value',
       requestRetries: 17
     };
-    const esclient = 'this is the esclient';
+    const dbclient = 'this is the dbclient';
 
     let searchServiceCallCount = 0;
 
@@ -232,15 +232,15 @@ module.exports.tests.timeout = function(test, common) {
       message: 'Request Timeout after 17ms'
     };
 
-    // a controller that validates the esclient and cmd that was passed to the search service
+    // a controller that validates the dbclient and cmd that was passed to the search service
     const controller = proxyquire('../../../controller/place', {
-      '../service/mget': (esclient, cmd, callback) => {
+      '../service/mget': (dbclient, cmd, callback) => {
         // not that the searchService got called
         searchServiceCallCount++;
 
         callback(timeoutError);
       }
-    })(config, esclient);
+    })(config, dbclient);
 
     const req = {
       clean: {
@@ -269,7 +269,7 @@ module.exports.tests.timeout = function(test, common) {
     const config = {
       indexName: 'indexName value'
     };
-    const esclient = 'this is the esclient';
+    const dbclient = 'this is the dbclient';
 
     let searchServiceCallCount = 0;
 
@@ -279,15 +279,15 @@ module.exports.tests.timeout = function(test, common) {
       message: 'an internal server error occurred'
     };
 
-    // a controller that validates the esclient and cmd that was passed to the search service
+    // a controller that validates the dbclient and cmd that was passed to the search service
     const controller = proxyquire('../../../controller/place', {
-      '../service/mget': (esclient, cmd, callback) => {
+      '../service/mget': (dbclient, cmd, callback) => {
         // not that the searchService got called
         searchServiceCallCount++;
 
         callback(nonTimeoutError);
       }
-    })(config, esclient);
+    })(config, dbclient);
 
     const req = {
       clean: {
@@ -317,21 +317,21 @@ module.exports.tests.timeout = function(test, common) {
     const config = {
       indexName: 'indexName value'
     };
-    const esclient = 'this is the esclient';
+    const dbclient = 'this is the dbclient';
 
     let searchServiceCallCount = 0;
 
     const stringTypeError = 'this is an error string';
 
-    // a controller that validates the esclient and cmd that was passed to the search service
+    // a controller that validates the dbclient and cmd that was passed to the search service
     const controller = proxyquire('../../../controller/place', {
-      '../service/mget': (esclient, cmd, callback) => {
+      '../service/mget': (dbclient, cmd, callback) => {
         // not that the searchService got called
         searchServiceCallCount++;
 
         callback(stringTypeError);
       }
-    })(config, esclient);
+    })(config, dbclient);
 
     const req = {
       clean: {

@@ -81,7 +81,8 @@ A good starting configuration file includes this section (fill in the service an
 
 ```
 {
-  "esclient": {
+  "dbclient": {
+    "engine": "opensearch"
     "hosts": [{
       "host": "elasticsearch"
     }]

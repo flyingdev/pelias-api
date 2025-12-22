@@ -4,17 +4,11 @@ const { Client: OSClient } = require('@opensearch-project/opensearch');
 /**
  * Factory for creating a search client.
  *
- * ⚠️ Config note:
- * We reuse the existing `esclient` block from pelias.json for both Elasticsearch
- * and OpenSearch. This avoids introducing a new `osclient` key.
- * If Pelias were being designed from scratch today, a dedicated `osclient` key
- * would likely be cleaner — but `esclient` works for both backends.
- *
  * Selection rules:
  * - If PELIAS_OPENSEARCH=true → use OpenSearch
  *   - Prefer OPENSEARCH_NODE env var
- *   - Else fall back to esclient.hosts[0] in pelias.json
- * - Else → use Elasticsearch with full esclient config
+ *   - Else fall back to dbclient.hosts[0] in pelias.json
+ * - Else → use Elasticsearch with full dbclient config
  */
 function createClient(peliasConfig) {
   if (process.env.PELIAS_OPENSEARCH === 'true') {
@@ -22,14 +16,14 @@ function createClient(peliasConfig) {
     let node = process.env.OPENSEARCH_NODE;
 
     // Fallback: build from pelias.json
-    if (!node && peliasConfig.esclient && peliasConfig.esclient.hosts && peliasConfig.esclient.hosts[0]) {
-      const { protocol, host, port } = peliasConfig.esclient.hosts[0];
+    if (!node && peliasConfig.dbclient && peliasConfig.dbclient.hosts && peliasConfig.dbclient.hosts[0]) {
+      const { protocol, host, port } = peliasConfig.dbclient.hosts[0];
       node = `${protocol}://${host}:${port}`;
     }
 
     if (!node) {
       throw new Error(
-        '[api] No OpenSearch node URL found. Set OPENSEARCH_NODE or configure esclient.hosts in pelias.json.'
+        '[api] No OpenSearch node URL found. Set OPENSEARCH_NODE or configure dbclient.hosts in pelias.json.'
       );
     }
 
@@ -39,7 +33,7 @@ function createClient(peliasConfig) {
 
   // Default: Elasticsearch
   console.log('[api] Using Elasticsearch config from pelias.json');
-  return new ESClient(peliasConfig.esclient || {});
+  return new ESClient(peliasConfig.dbclient || {});
 }
 
 function normalizeQuery(client, query) {

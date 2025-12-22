@@ -19,7 +19,7 @@ module.exports.tests.interface = (test, common) => {
 };
 
 module.exports.tests.error_conditions = (test, common) => {
-  test('esclient.mget returning error should log and pass it on', (t) => {
+  test('dbclient.mget returning error should log and pass it on', (t) => {
     const errorMessages = [];
 
     const service = proxyquire('../../../service/mget', {
@@ -40,7 +40,7 @@ module.exports.tests.error_conditions = (test, common) => {
       }
     };
 
-    const esclient = {
+    const dbclient = {
       mget: (cmd, callback) => {
         t.deepEquals(cmd, expectedCmd);
 
@@ -70,13 +70,13 @@ module.exports.tests.error_conditions = (test, common) => {
       t.end();
     };
 
-    service(esclient, 'this is the query', next);
+    service(dbclient, 'this is the query', next);
 
   });
 };
 
 module.exports.tests.success_conditions = (test, common) => {
-  test('esclient.mget returning data.docs should filter and map', (t) => {
+  test('dbclient.mget returning data.docs should filter and map', (t) => {
     const errorMessages = [];
 
     const service = proxyquire('../../../service/mget', {
@@ -97,7 +97,7 @@ module.exports.tests.success_conditions = (test, common) => {
       }
     };
 
-    const esclient = {
+    const dbclient = {
       mget: (cmd, callback) => {
         t.deepEquals(cmd, expectedCmd);
 
@@ -150,11 +150,11 @@ module.exports.tests.success_conditions = (test, common) => {
       t.end();
     };
 
-    service(esclient, 'this is the query', next);
+    service(dbclient, 'this is the query', next);
 
   });
 
-  test('esclient.mget callback with falsy data should return empty array', (t) => {
+  test('dbclient.mget callback with falsy data should return empty array', (t) => {
     const errorMessages = [];
 
     const service = proxyquire('../../../service/mget', {
@@ -175,7 +175,7 @@ module.exports.tests.success_conditions = (test, common) => {
       }
     };
 
-    const esclient = {
+    const dbclient = {
       mget: (cmd, callback) => {
         t.deepEquals(cmd, expectedCmd);
 
@@ -194,11 +194,11 @@ module.exports.tests.success_conditions = (test, common) => {
       t.end();
     };
 
-    service(esclient, 'this is the query', next);
+    service(dbclient, 'this is the query', next);
 
   });
 
-  test('esclient.mget callback with non-array data.docs should return empty array', (t) => {
+  test('dbclient.mget callback with non-array data.docs should return empty array', (t) => {
     const errorMessages = [];
 
     const service = proxyquire('../../../service/mget', {
@@ -219,7 +219,7 @@ module.exports.tests.success_conditions = (test, common) => {
       }
     };
 
-    const esclient = {
+    const dbclient = {
       mget: (cmd, callback) => {
         t.deepEquals(cmd, expectedCmd);
 
@@ -242,7 +242,7 @@ module.exports.tests.success_conditions = (test, common) => {
       t.end();
     };
 
-    service(esclient, 'this is the query', next);
+    service(dbclient, 'this is the query', next);
 
   });
 

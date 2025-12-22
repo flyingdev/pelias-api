@@ -20,7 +20,7 @@ module.exports.tests.success = function(test, common) {
           indexName: 'indexName value'
       }
     };
-    const esclient = 'this is the esclient';
+    const dbclient = 'this is the dbclient';
     const query = () => {
       return {
         body: 'this is the query body',
@@ -31,10 +31,10 @@ module.exports.tests.success = function(test, common) {
     // request timeout messages willl be written here
     const infoMesssages = [];
 
-    // a controller that validates the esclient and cmd that was passed to the search service
+    // a controller that validates the dbclient and cmd that was passed to the search service
     const controller = proxyquire('../../../controller/search', {
-      '../service/search': (esclient, cmd, callback) => {
-        t.equal(esclient, 'this is the esclient');
+      '../service/search': (dbclient, cmd, callback) => {
+        t.equal(dbclient, 'this is the dbclient');
         const expectedCmd = {
           index: 'indexName value',
           body: 'this is the query body'
@@ -64,7 +64,7 @@ module.exports.tests.success = function(test, common) {
           };
         }
       }
-    })(config, esclient, query, () => { return true; });
+    })(config, dbclient, query, () => { return true; });
 
     const req = { clean: { }, errors: [], warnings: [] };
     const res = {};
@@ -91,7 +91,7 @@ module.exports.tests.success = function(test, common) {
           indexName: 'indexName value'
       }
     };
-    const esclient = 'this is the esclient';
+    const dbclient = 'this is the dbclient';
     const query = () => {
       return {
         body: 'this is the query body',
@@ -102,10 +102,10 @@ module.exports.tests.success = function(test, common) {
     // request timeout messages willl be written here
     const infoMesssages = [];
 
-    // a controller that validates the esclient and cmd that was passed to the search service
+    // a controller that validates the dbclient and cmd that was passed to the search service
     const controller = proxyquire('../../../controller/search', {
-      '../service/search': (esclient, cmd, callback) => {
-        t.equal(esclient, 'this is the esclient');
+      '../service/search': (dbclient, cmd, callback) => {
+        t.equal(dbclient, 'this is the dbclient');
         const expectedCmd = {
           index: 'indexName value',
           body: 'this is the query body'
@@ -134,7 +134,7 @@ module.exports.tests.success = function(test, common) {
           };
         }
       }
-    })(config, esclient, query, () => { return true; });
+    })(config, dbclient, query, () => { return true; });
 
     const req = { clean: { }, errors: [], warnings: [] };
     const res = {};
@@ -161,7 +161,7 @@ module.exports.tests.success = function(test, common) {
           indexName: 'indexName value'
       }
     };
-    const esclient = 'this is the esclient';
+    const dbclient = 'this is the dbclient';
     const query = () => {
       return {
         body: 'this is the query body',
@@ -172,10 +172,10 @@ module.exports.tests.success = function(test, common) {
     // request timeout messages willl be written here
     const infoMesssages = [];
 
-    // a controller that validates the esclient and cmd that was passed to the search service
+    // a controller that validates the dbclient and cmd that was passed to the search service
     const controller = proxyquire('../../../controller/search', {
-      '../service/search': (esclient, cmd, callback) => {
-        t.equal(esclient, 'this is the esclient');
+      '../service/search': (dbclient, cmd, callback) => {
+        t.equal(dbclient, 'this is the dbclient');
         const expectedCmd = {
           index: 'indexName value',
           body: 'this is the query body'
@@ -204,7 +204,7 @@ module.exports.tests.success = function(test, common) {
           };
         }
       }
-    })(config, esclient, query, () => { return true; });
+    })(config, dbclient, query, () => { return true; });
 
     const req = { clean: { }, errors: [], warnings: [] };
     const res = { meta: { query_type: 'this is the query type from a previous query'} };
@@ -236,7 +236,7 @@ module.exports.tests.success = function(test, common) {
           indexName: 'indexName value'
       }
     };
-    const esclient = 'this is the esclient';
+    const dbclient = 'this is the dbclient';
     const query = () => {
       return {
         body: 'this is the query body',
@@ -255,10 +255,10 @@ module.exports.tests.success = function(test, common) {
     // request timeout messages willl be written here
     const infoMesssages = [];
 
-    // a controller that validates the esclient and cmd that was passed to the search service
+    // a controller that validates the dbclient and cmd that was passed to the search service
     const controller = proxyquire('../../../controller/search', {
-      '../service/search': (esclient, cmd, callback) => {
-        t.equal(esclient, 'this is the esclient');
+      '../service/search': (dbclient, cmd, callback) => {
+        t.equal(dbclient, 'this is the dbclient');
         const expectedCmd = {
           index: 'indexName value',
           body: 'this is the query body'
@@ -295,7 +295,7 @@ module.exports.tests.success = function(test, common) {
           };
         }
       }
-    })(config, esclient, query, () => { return true; });
+    })(config, dbclient, query, () => { return true; });
 
     const req = { clean: { }, errors: [], warnings: [] };
     const res = {};
@@ -329,7 +329,7 @@ module.exports.tests.timeout = function(test, common) {
           indexName: 'indexName value'
       }
     };
-    const esclient = 'this is the esclient';
+    const dbclient = 'this is the dbclient';
     const query = () => {
       return { body: 'this is the query body' };
     };
@@ -345,10 +345,10 @@ module.exports.tests.timeout = function(test, common) {
     // request timeout messages willl be written here
     const infoMesssages = [];
 
-    // a controller that validates the esclient and cmd that was passed to the search service
+    // a controller that validates the dbclient and cmd that was passed to the search service
     const controller = proxyquire('../../../controller/search', {
-      '../service/search': (esclient, cmd, callback) => {
-        t.equal(esclient, 'this is the esclient');
+      '../service/search': (dbclient, cmd, callback) => {
+        t.equal(dbclient, 'this is the dbclient');
         const expectedCmd = {
           index: 'indexName value',
           body: 'this is the query body'
@@ -378,7 +378,7 @@ module.exports.tests.timeout = function(test, common) {
           };
         }
       }
-    })(config, esclient, query, () => { return true; });
+    })(config, dbclient, query, () => { return true; });
 
     const req = { clean: { }, errors: [], warnings: [] };
     const res = {};
@@ -410,7 +410,7 @@ module.exports.tests.timeout = function(test, common) {
         requestRetries: 17
       }
     };
-    const esclient = 'this is the esclient';
+    const dbclient = 'this is the dbclient';
     const query = () => {
       return { };
     };
@@ -423,15 +423,15 @@ module.exports.tests.timeout = function(test, common) {
       message: 'Request Timeout after 17ms'
     };
 
-    // a controller that validates the esclient and cmd that was passed to the search service
+    // a controller that validates the dbclient and cmd that was passed to the search service
     const controller = proxyquire('../../../controller/search', {
-      '../service/search': (esclient, cmd, callback) => {
+      '../service/search': (dbclient, cmd, callback) => {
         // not that the searchService got called
         searchServiceCallCount++;
 
         callback(timeoutError);
       }
-    })(config, esclient, query, () => { return true; });
+    })(config, dbclient, query, () => { return true; });
 
     const req = { clean: { }, errors: [], warnings: [] };
     const res = {};
@@ -450,7 +450,7 @@ module.exports.tests.timeout = function(test, common) {
       indexName: 'indexName value',
       requestRetries: 17
     };
-    const esclient = 'this is the esclient';
+    const dbclient = 'this is the dbclient';
     const query = () => {
       return { };
     };
@@ -463,15 +463,15 @@ module.exports.tests.timeout = function(test, common) {
       message: 'an internal server error occurred'
     };
 
-    // a controller that validates the esclient and cmd that was passed to the search service
+    // a controller that validates the dbclient and cmd that was passed to the search service
     const controller = proxyquire('../../../controller/search', {
-      '../service/search': (esclient, cmd, callback) => {
+      '../service/search': (dbclient, cmd, callback) => {
         // not that the searchService got called
         searchServiceCallCount++;
 
         callback(nonTimeoutError);
       }
-    })(config, esclient, query, () => { return true; });
+    })(config, dbclient, query, () => { return true; });
 
     const req = { clean: { }, errors: [], warnings: [] };
     const res = {};
@@ -497,7 +497,7 @@ module.exports.tests.timeout = function(test, common) {
         requestRetries: 17
       }
     };
-    const esclient = 'this is the esclient';
+    const dbclient = 'this is the dbclient';
     const query = () => {
       return { };
     };
@@ -506,15 +506,15 @@ module.exports.tests.timeout = function(test, common) {
 
     const stringTypeError = 'this is an error string';
 
-    // a controller that validates the esclient and cmd that was passed to the search service
+    // a controller that validates the dbclient and cmd that was passed to the search service
     const controller = proxyquire('../../../controller/search', {
-      '../service/search': (esclient, cmd, callback) => {
+      '../service/search': (dbclient, cmd, callback) => {
         // not that the searchService got called
         searchServiceCallCount++;
 
         callback(stringTypeError);
       }
-    })(config, esclient, query, () => { return true; });
+    })(config, dbclient, query, () => { return true; });
 
     const req = { clean: { }, errors: [], warnings: [] };
     const res = {};
@@ -537,13 +537,13 @@ module.exports.tests.timeout = function(test, common) {
 
 module.exports.tests.should_execute = (test, common) => {
   test('should_execute returning false and empty req.errors should call next', (t) => {
-    const esclient = () => {
-      throw new Error('esclient should not have been called');
+    const dbclient = () => {
+      throw new Error('dbclient should not have been called');
     };
     const query = () => {
       throw new Error('query should not have been called');
     };
-    const controller = setup( {}, esclient, query, () => { return false; } );
+    const controller = setup( {}, dbclient, query, () => { return false; } );
 
     const req = { };
     const res = { };

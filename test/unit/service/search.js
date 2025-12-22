@@ -35,7 +35,7 @@ module.exports.tests.error_conditions = (test, common) => {
       }
     });
 
-    const esclient = {
+    const dbclient = {
       search: (cmd, callback) => {
         t.equals(cmd, 'this is the query');
         callback(null, {
@@ -55,11 +55,11 @@ module.exports.tests.error_conditions = (test, common) => {
       t.end();
     };
 
-    service(esclient, 'this is the query', next);
+    service(dbclient, 'this is the query', next);
 
   });
 
-  test('esclient.search returning error should log and pass it on', (t) => {
+  test('dbclient.search returning error should log and pass it on', (t) => {
     const errorMessages = [];
 
     const service = proxyquire('../../../service/search', {
@@ -74,7 +74,7 @@ module.exports.tests.error_conditions = (test, common) => {
       }
     });
 
-    const esclient = {
+    const dbclient = {
       search: (cmd, callback) => {
         t.deepEquals(cmd, 'this is the query');
 
@@ -104,13 +104,13 @@ module.exports.tests.error_conditions = (test, common) => {
       t.end();
     };
 
-    service(esclient, 'this is the query', next);
+    service(dbclient, 'this is the query', next);
 
   });
 };
 
 module.exports.tests.success_conditions = (test, common) => {
-  test('esclient.search returning data.docs should filter and map', (t) => {
+  test('dbclient.search returning data.docs should filter and map', (t) => {
     const errorMessages = [];
 
     const service = proxyquire('../../../service/search', {
@@ -125,7 +125,7 @@ module.exports.tests.success_conditions = (test, common) => {
       }
     });
 
-    const esclient = {
+    const dbclient = {
       search: (cmd, callback) => {
         t.deepEquals(cmd, 'this is the query');
 
@@ -186,11 +186,11 @@ module.exports.tests.success_conditions = (test, common) => {
       t.end();
     };
 
-    service(esclient, 'this is the query', next);
+    service(dbclient, 'this is the query', next);
 
   });
 
-  test('esclient.search returning falsy data should return empty docs and meta', (t) => {
+  test('dbclient.search returning falsy data should return empty docs and meta', (t) => {
     const errorMessages = [];
 
     const service = proxyquire('../../../service/search', {
@@ -205,7 +205,7 @@ module.exports.tests.success_conditions = (test, common) => {
       }
     });
 
-    const esclient = {
+    const dbclient = {
       search: (cmd, callback) => {
         t.deepEquals(cmd, 'this is the query');
 
@@ -226,11 +226,11 @@ module.exports.tests.success_conditions = (test, common) => {
       t.end();
     };
 
-    service(esclient, 'this is the query', next);
+    service(dbclient, 'this is the query', next);
 
   });
 
-  test('esclient.search returning falsy data.hits should return empty docs and meta', (t) => {
+  test('dbclient.search returning falsy data.hits should return empty docs and meta', (t) => {
     const errorMessages = [];
 
     const service = proxyquire('../../../service/search', {
@@ -245,7 +245,7 @@ module.exports.tests.success_conditions = (test, common) => {
       }
     });
 
-    const esclient = {
+    const dbclient = {
       search: (cmd, callback) => {
         t.deepEquals(cmd, 'this is the query');
 
@@ -272,11 +272,11 @@ module.exports.tests.success_conditions = (test, common) => {
       t.end();
     };
 
-    service(esclient, 'this is the query', next);
+    service(dbclient, 'this is the query', next);
 
   });
 
-  test('esclient.search returning non-array data.hits.hits should return empty docs and meta', (t) => {
+  test('dbclient.search returning non-array data.hits.hits should return empty docs and meta', (t) => {
     const errorMessages = [];
 
     const service = proxyquire('../../../service/search', {
@@ -291,7 +291,7 @@ module.exports.tests.success_conditions = (test, common) => {
       }
     });
 
-    const esclient = {
+    const dbclient = {
       search: (cmd, callback) => {
         t.deepEquals(cmd, 'this is the query');
 
@@ -319,7 +319,7 @@ module.exports.tests.success_conditions = (test, common) => {
       t.end();
     };
 
-    service(esclient, 'this is the query', next);
+    service(dbclient, 'this is the query', next);
 
   });
 
