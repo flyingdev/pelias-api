@@ -3,7 +3,7 @@ var geojsonify = require('../helper/geojsonify');
 var _ = require('lodash');
 
 /**
- * Returns a middleware function that converts elasticsearch
+ * Returns a middleware function that converts opensearch
  * results into geocodeJSON format.
  *
  * @param {object} [peliasConfig] api portion of pelias config
@@ -25,7 +25,7 @@ function setup(peliasConfig, basePath) {
 }
 
 /**
- * Converts elasticsearch results into geocodeJSON format
+ * Converts opensearch results into geocodeJSON format
  *
  * @param {object} req
  * @param {object} res

@@ -13,7 +13,7 @@ function isTimeoutError(error) {
          error instanceof es.errors.RequestTimeout;
 }
 
-function isElasticsearchError(error) {
+function isOpenSearchError(error) {
   const knownErrors = [ es.errors.NoConnections,
                         es.errors.ConnectionFault ];
 
@@ -36,7 +36,7 @@ function sendJSONResponse(req, res, next) {
   const errorCodes = errors.map(function(error) {
     if (isParameterError(error)) {
       return 400;
-    } else if (isTimeoutError(error) || isElasticsearchError(error)) {
+    } else if (isTimeoutError(error) || isOpenSearchError(error)) {
       return 502;
     } else {
       return 500;

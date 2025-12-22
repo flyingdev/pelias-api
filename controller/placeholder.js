@@ -181,7 +181,7 @@ function placetypeHasNameAndId(hierarchyElement) {
           !_.isEmpty(_.trim(hierarchyElement.id));
 }
 
-// synthesize an ES doc from a placeholder result
+// synthesize an OS doc from a placeholder result
 function synthesizeDocs(boundaryCountry, result) {
   const doc = new Document('whosonfirst', result.placetype, result.id.toString());
   doc.setName('default', result.name);
@@ -237,12 +237,12 @@ function synthesizeDocs(boundaryCountry, result) {
       });
     });
 
-  return buildESDoc(doc);
+  return buildOSDoc(doc);
 
 }
 
-function buildESDoc(doc) {
-  const esDoc = doc.toESDocument();
+function buildOSDoc(doc) {
+  const esDoc = doc.toOSDocument();
   return _.extend(esDoc.data, { _id: esDoc._id });
 }
 
@@ -271,7 +271,7 @@ function setup(placeholderService, do_geometric_filters_apply, should_execute) {
       } else {
         const boundaryCountry = do_geometric_filters_apply ? _.get(req, ['clean', 'boundary.country']) : undefined;
 
-        // convert results to ES docs
+        // convert results to OS docs
         // boundary.country filter must happen after synthesis since multiple
         //  lineages may produce different country docs
         res.meta = {
@@ -293,7 +293,7 @@ function setup(placeholderService, do_geometric_filters_apply, should_execute) {
                     .filter(getBoundaryCircleFilter(req.clean, do_geometric_filters_apply))
                     // filter out results that don't have the boundary.gid in the lineage
                     .filter(getBoundaryGidFilter(req.clean, do_geometric_filters_apply))
-                    // convert results to ES docs
+                    // convert results to OS docs
                     .map(_.partial(synthesizeDocs, boundaryCountry));
 
         const messageParts = [

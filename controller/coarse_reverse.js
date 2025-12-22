@@ -96,9 +96,9 @@ function synthesizeDoc(results) {
 
     }
 
-    const esDoc = doc.toESDocument();
-    esDoc.data._id = esDoc._id;
-    return esDoc.data;
+    const osDoc = doc.toOSDocument();
+    osDoc.data._id = osDoc._id;
+    return osDoc.data;
 
   } catch( e ) {
     // an error occurred when generating a new Document

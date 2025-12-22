@@ -23,7 +23,7 @@ addressUsingIdsQuery.filter( peliasQuery.view.layers );
 // This query is a departure from traditional Pelias queries where textual
 // names of admin areas were looked up.  This query uses the ids returned by
 // placeholder for lookups which dramatically reduces the amount of information
-// that ES has to store and allows us to have placeholder handle altnames on
+// that OpenSearch has to store and allows us to have placeholder handle altnames on
 // behalf of Pelias.
 //
 // For the happy path, an input like '30 West 26th Street, Manhattan' would result

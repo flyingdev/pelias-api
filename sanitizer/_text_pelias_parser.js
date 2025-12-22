@@ -181,7 +181,7 @@ function parse (t) {
   if (postfix.length) { parsed_text.admin = postfix; }
 
   // 4. set 'subject', this is the text which will target the 'name.*'
-  // fields in elasticsearch queries
+  // fields in opensearch queries
 
   // an address query
   if (!_.isEmpty(parsed_text.housenumber) && !_.isEmpty(parsed_text.street)) {

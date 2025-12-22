@@ -1,6 +1,6 @@
 /**
 
-  cmd can be any valid ES query command
+  cmd can be any valid OpenSearch query command
 
 **/
 

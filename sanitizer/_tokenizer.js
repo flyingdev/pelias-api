@@ -35,7 +35,7 @@ const shouldMarkNumericFinalTokenAsComplete = (clean) => {
   or 'incomplete' (the user has possibly only typed part of the token).
 
   note: we don't need to strip punctuation as that will be handled on the
-  elasticsearch side, so sending a token such as 'st.' is not an issue, these
+  opensearch side, so sending a token such as 'st.' is not an issue, these
   tokens should *not* be modified as the anaylsis can use the punctuation to
   infer meaning.
 
@@ -89,7 +89,7 @@ function _sanitize( raw, clean ){
   // sanity check that the text is valid.
   if( _.isString(text) && !_.isEmpty(text) ){
 
-    // split according to the regex used in the elasticsearch tokenizer
+    // split according to the regex used in the opensearch tokenizer
     // see: https://github.com/pelias/schema/blob/master/settings.js
     // see: settings.analysis.tokenizer.peliasNameTokenizer
     clean.tokens = text
