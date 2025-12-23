@@ -5,7 +5,7 @@
 **/
 
 const _ = require('lodash');
-const es = require('elasticsearch');
+const os = require('@opensearch-project/opensearch');
 const logger = require( 'pelias-logger' ).get( 'api' );
 
 function service( searchClient, cmd, cb ){
@@ -31,7 +31,7 @@ function service( searchClient, cmd, cb ){
     // be discarded.
     // https://github.com/pelias/api/issues/1384
     if( _.get(data, 'timed_out', false) === true ){
-      const err = new es.errors.RequestTimeout('request timed_out=true');
+      const err = new os.errors.TimeoutError('request timed_out=true');
       logger.error( `searchClient error ${err}` );
       return cb( err );
     }

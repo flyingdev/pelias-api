@@ -1,5 +1,5 @@
 const proxyquire = require('proxyquire').noCallThru();
-const es = require('elasticsearch');
+const os = require('@opensearch-project/opensearch');
 
 module.exports.tests = {};
 
@@ -45,7 +45,7 @@ module.exports.tests.error_conditions = (test, common) => {
     };
 
     const next = (err, docs) => {
-      const expected = new es.errors.RequestTimeout('request timed_out=true');
+      const expected = new os.errors.TimeoutError('request timed_out=true');
       t.deepEquals(err, expected);
       t.equals(docs, undefined);
 
