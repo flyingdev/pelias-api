@@ -23,7 +23,7 @@ module.exports.tests.sanitize_debug = function(test, common) {
       const internalSanitizer = require('../../../sanitizer/_debug')(true);
       const raw = { debug: value };
       const clean = {};
-      const expected_clean = { enableDebug: true, enableElasticDebug: true, exposeInternalDebugTools: true };
+      const expected_clean = { enableDebug: true, enableOpenSearchDebug: true, exposeInternalDebugTools: true };
 
       const messages = internalSanitizer.sanitize(raw, clean);
 
@@ -52,7 +52,7 @@ module.exports.tests.sanitize_debug = function(test, common) {
       const internalSanitizer = require('../../../sanitizer/_debug')(true);
       const raw = { debug: value };
       const clean = {};
-      const expected_clean = { enableDebug: true, enableElasticDebug: true, enableElasticExplain: true, exposeInternalDebugTools: true };
+      const expected_clean = { enableDebug: true, enableOpenSearchDebug: true, enableOpenSearchExplain: true, exposeInternalDebugTools: true };
 
       const messages = internalSanitizer.sanitize(raw, clean);
 

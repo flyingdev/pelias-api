@@ -43,10 +43,10 @@ function _setup(exposeInternalDebugTools) {
           clean.enableDebug = true;
         }
         if (debugLevel >= 2) {
-          clean.enableElasticDebug = true;
+          clean.enableOpenSearchDebug = true;
         }
         if (debugLevel >= 3) {
-          clean.enableElasticExplain = true;
+          clean.enableOpenSearchExplain = true;
         }
       }
 

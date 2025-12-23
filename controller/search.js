@@ -63,8 +63,8 @@ function setup( peliasConfig, searchClient, query, should_execute ){
       cmd.searchType = 'dfs_query_then_fetch';
     }
 
-    // support for the 'clean.enableElasticExplain' config flag
-    if (_.get(req, 'clean.enableElasticExplain') === true) {
+    // support for the 'clean.enableOpenSearchExplain' config flag
+    if (_.get(req, 'clean.enableOpenSearchExplain') === true) {
       cmd.explain = true;
     }
 
@@ -164,7 +164,7 @@ function setup( peliasConfig, searchClient, query, should_execute ){
           }});
         }
         logger.debug('[SearchClient response]', docs);
-        if (req.clean.enableElasticDebug) {
+        if (req.clean.enableOpenSearchDebug) {
           debugLog.push(req, { SearchClient_response: _.cloneDeep({ docs, meta, data }) });
         }
         next();
