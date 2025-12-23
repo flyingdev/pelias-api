@@ -11,7 +11,7 @@
 
 // we use the default config to avoid making calls to
 // a cluster running on a non-standard port.
-var client = require('elasticsearch').Client(),
+var client = require('@opensearch-project/opensearch').Client(),
     async = require('async'),
     actions = [];
 var config = require('pelias-config').generate().api;

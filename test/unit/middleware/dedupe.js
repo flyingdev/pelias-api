@@ -1,6 +1,6 @@
-var data = require('../fixture/dedupe_elasticsearch_results');
-var nonAsciiData = require('../fixture/dedupe_elasticsearch_nonascii_results');
-var customLayerData = require('../fixture/dedupe_elasticsearch_custom_layer_results');
+var data = require('../fixture/dedupe_opensearch_results');
+var nonAsciiData = require('../fixture/dedupe_opensearch_nonascii_results');
+var customLayerData = require('../fixture/dedupe_opensearch_custom_layer_results');
 var onlyPostalcodeDiffersData = require('../fixture/dedupe_only_postalcode_differs');
 var dedupe = require('../../../middleware/dedupe')();
 
