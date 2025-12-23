@@ -10,7 +10,7 @@ const logger = require( 'pelias-logger' ).get( 'api' );
 
 function service( searchClient, cmd, cb ){
 
-  // query elasticsearch
+  // query opensearch
   const startTime = new Date();
 
   searchClient.search( cmd, function( err, body ){
@@ -19,9 +19,9 @@ function service( searchClient, cmd, cb ){
       data.response_time = new Date() - startTime;
     }
 
-    // handle elasticsearch errors
+    // handle opensearch errors
     if( err ){
-      logger.error( `elasticsearch error ${err}` );
+      logger.error( `opensearch error ${err}` );
       return cb( err );
     }
 

@@ -24,7 +24,7 @@ function _setup(exposeInternalDebugTools) {
       const debugLevelMapping = {
         'false': 0,
         'true': 1,
-        'elastic': 2,
+        'opensearch': 2,
         'explain': 3
       };
 

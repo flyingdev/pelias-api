@@ -99,8 +99,8 @@ module.exports.tests.generic_server_error = function(test, common) {
   });
 };
 
-module.exports.tests.generic_elasticsearch_error = function(test, common) {
-  test('generic elasticsearch error', function(t) {
+module.exports.tests.generic_opensearch_error = function(test, common) {
+  test('generic opensearch error', function(t) {
     var res = { body: { geocoding: {
       errors: [ new os.errors.OpenSearchClientError('an error') ]
     }}};

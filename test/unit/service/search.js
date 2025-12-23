@@ -99,7 +99,7 @@ module.exports.tests.error_conditions = (test, common) => {
       t.equals(docs, undefined);
 
       t.ok(errorMessages.find((msg) => {
-        return msg === `elasticsearch error ${err}`;
+        return msg === `opensearch error ${err}`;
       }));
       t.end();
     };

@@ -84,7 +84,9 @@ A good starting configuration file includes this section (fill in the service an
   "dbclient": {
     "engine": "opensearch"
     "hosts": [{
-      "host": "elasticsearch"
+      "protocol": "http",
+      "host": "opensearch",
+      "port": 9200
     }]
   },
   "api": {

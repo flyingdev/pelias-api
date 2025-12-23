@@ -2,23 +2,23 @@ var logger = require( 'pelias-logger' ).get( 'api' );
 
 function service( searchClient, query, cb ){
 
-  // elasticsearch command
+  // opensearch command
   var cmd = {
     body: {
       docs: query
     }
   };
 
-  // query elasticsearch
+  // query opensearch
   const startTime = new Date();
   searchClient.mget( cmd, function( err, data ){
     if (data) {
       data.response_time = new Date() - startTime;
     }
 
-    // handle elasticsearch errors
+    // handle opensearch errors
     if( err ){
-      logger.error( `elasticsearch error ${err}`);
+      logger.error( `opensearch error ${err}`);
       return cb( err );
     }
 

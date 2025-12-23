@@ -18,7 +18,7 @@ module.exports.tests.sanitize_debug = function(test, common) {
     });
   });
 
-  ['2', 2, 'elastic'].forEach((value) => {
+  ['2', 2, 'opensearch'].forEach((value) => {
     test(`debug flag is on: ${value} and exposeInternalDebugTools=true`, function(t) {
       const internalSanitizer = require('../../../sanitizer/_debug')(true);
       const raw = { debug: value };
